@@ -10,7 +10,7 @@ import java.util.Objects;
 public final class Main extends JavaPlugin {
 
     private Location firstSP;
-    private int SP_h=5;
+    private final int SP_h=5;
     private double r2;
 
     @Override
@@ -21,30 +21,32 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(firstSP.getWorld()).setGameRule(GameRule.SPAWN_RADIUS, 0);
         Objects.requireNonNull(firstSP.getWorld()).setGameRule(GameRule.MAX_ENTITY_CRAMMING, 0);
 
-        Location temp_l=firstSP.clone();
-
-        nextX(temp_l,-1*SP_h/2);
-        nextY(temp_l,-1);
-        nextZ(temp_l,-1*SP_h/2);
-        for (int y=0;y<=SP_h;y++) {
-            for (int x = 0; x < SP_h; x++) {
-                for (int z = 0; z < SP_h; z++) {
-                    if(z==0||z==(SP_h-1)||x==0||x==(SP_h-1)||y==SP_h){
-                        temp_l.getBlock().setType(Material.BEDROCK);
-                    }else if(y==0) {
-                        temp_l.getBlock().setType(Material.GRASS_BLOCK);
-                    }else{
-                        temp_l.getBlock().setType(Material.AIR);
+        Location temp_l = firstSP.clone();
+        nextY(temp_l,SP_h-1);
+        if(!temp_l.getBlock().getType().equals(Material.BEDROCK)){//初期スポーンの真上に岩盤があるかどうかのチェック
+            temp_l = firstSP.clone();
+            nextX(temp_l, -1 * SP_h / 2);
+            nextY(temp_l, -1);
+            nextZ(temp_l, -1 * SP_h / 2);
+            for (int y = 0; y <= SP_h; y++) {
+                for (int x = 0; x < SP_h; x++) {
+                    for (int z = 0; z < SP_h; z++) {
+                        if (z == 0 || z == (SP_h - 1) || x == 0 || x == (SP_h - 1) || y == SP_h) {
+                            temp_l.getBlock().setType(Material.BEDROCK);
+                        } else if (y == 0) {
+                            temp_l.getBlock().setType(Material.GRASS_BLOCK);
+                        } else {
+                            temp_l.getBlock().setType(Material.AIR);
+                        }
+                        nextZ(temp_l);
                     }
-                    nextZ(temp_l);
+                    nextX(temp_l);
+                    nextZ(temp_l, -1 * SP_h);
                 }
-                nextX(temp_l);
-                nextZ(temp_l,-1*SP_h);
+                nextY(temp_l);
+                nextX(temp_l, -1 * SP_h);
             }
-            nextY(temp_l);
-            nextX(temp_l,-1*SP_h);
         }
-
         r2=2*Math.pow(SP_h/2,2);
         getLogger().info("読み込みが完了しました。");
     }
