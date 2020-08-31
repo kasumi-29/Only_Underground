@@ -1,0 +1,4 @@
+name: Only_Underground
+version: ${project.version}
+main: kun.minecraft_plugin.tiny.only_underground.Main
+api-version: 1.16
