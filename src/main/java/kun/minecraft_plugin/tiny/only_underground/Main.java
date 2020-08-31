@@ -9,15 +9,20 @@ import java.util.Objects;
 
 public final class Main extends JavaPlugin {
 
+    private Location firstSP;
+    private int SP_h=5;
+    private double r2;
+
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new event(this), this);
-        Location firstSP =getServer().getWorlds().get(0).getSpawnLocation();
+        firstSP=getServer().getWorlds().get(0).getSpawnLocation();
+
         Objects.requireNonNull(firstSP.getWorld()).setGameRule(GameRule.SPAWN_RADIUS, 0);
         Objects.requireNonNull(firstSP.getWorld()).setGameRule(GameRule.MAX_ENTITY_CRAMMING, 0);
 
         Location temp_l=firstSP.clone();
-        int SP_h=5;
+
         nextX(temp_l,-1*SP_h/2);
         nextY(temp_l,-1);
         nextZ(temp_l,-1*SP_h/2);
@@ -40,6 +45,7 @@ public final class Main extends JavaPlugin {
             nextX(temp_l,-1*SP_h);
         }
 
+        r2=2*Math.pow(SP_h/2,2);
         getLogger().info("読み込みが完了しました。");
     }
 
@@ -60,5 +66,9 @@ public final class Main extends JavaPlugin {
     }
     private void nextY(Location l){
         nextY(l,1);
+    }
+
+    public boolean checkR(Location l){
+        return firstSP.distanceSquared(l)<=r2;
     }
 }
