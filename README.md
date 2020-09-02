@@ -25,4 +25,4 @@ CraftBukkit 1.16.2
 
 ## ダウンロード
 まだ最終確認中...
-- [ ~~ダウンロードはこちら~~ ](https://github.com/kasumi-29/Only_Underground/releases/tag/v2.1.0)
+- [ ~~ダウンロードはこちら~~ ](https://github.com/kasumi-29/Only_Underground/releases/tag/v2.0.0)

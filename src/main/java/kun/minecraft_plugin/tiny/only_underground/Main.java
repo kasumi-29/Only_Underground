@@ -10,7 +10,6 @@ import java.util.Objects;
 public final class Main extends JavaPlugin {
 
     private Location firstSP;
-    private final int SP_h=5;
     private double r2;
 
     @Override
@@ -18,11 +17,14 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new event(this), this);
         firstSP=getServer().getWorlds().get(0).getSpawnLocation();
 
+        saveDefaultConfig();
+        int SP_h = getConfig().getInt("size",5);
+
         Objects.requireNonNull(firstSP.getWorld()).setGameRule(GameRule.SPAWN_RADIUS, 0);
         Objects.requireNonNull(firstSP.getWorld()).setGameRule(GameRule.MAX_ENTITY_CRAMMING, 0);
 
         Location temp_l = firstSP.clone();
-        nextY(temp_l,SP_h-1);
+        nextY(temp_l, SP_h -1);
         if(!temp_l.getBlock().getType().equals(Material.BEDROCK)){//初期スポーンの真上に岩盤があるかどうかのチェック
             temp_l = firstSP.clone();
             nextX(temp_l, -1 * SP_h / 2);
@@ -47,7 +49,7 @@ public final class Main extends JavaPlugin {
                 nextX(temp_l, -1 * SP_h);
             }
         }
-        r2=2*Math.pow(SP_h/2,2);
+        r2=2*Math.pow(SP_h /2,2);
         getLogger().info("読み込みが完了しました。");
     }
 
