@@ -1,4 +1,4 @@
-# 吸血鬼 プラグイン
+# 地上なんて無かった（吸血鬼） プラグイン
 ## 概要
 Minecraftの Bukkit/Spigot サーバーで利用できるプラグインです。  
 てりぃ氏が2013年から投稿を行ったゆっくり実況「 [【Minecraft】地上なんて無かった](https://www.nicovideo.jp/user/9762566/mylist/39480698) 」
