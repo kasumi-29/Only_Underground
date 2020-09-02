@@ -18,7 +18,7 @@ public final class Main extends JavaPlugin {
         firstSP=getServer().getWorlds().get(0).getSpawnLocation();
 
         saveDefaultConfig();
-        int SP_h = getConfig().getInt("size",5);
+        int SP_h = Math.max(getConfig().getInt("size",5),4);
 
         Objects.requireNonNull(firstSP.getWorld()).setGameRule(GameRule.SPAWN_RADIUS, 0);
         Objects.requireNonNull(firstSP.getWorld()).setGameRule(GameRule.MAX_ENTITY_CRAMMING, 0);
